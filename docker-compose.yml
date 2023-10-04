@@ -12,6 +12,8 @@ services:
             - 10443:443
         environment:
             - CADDY_INGRESS_NETWORKS=caddy
+        networks:
+            - caddy
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - ./data/caddy:/data
@@ -30,6 +32,8 @@ services:
             # So when you want to perform git pull or change something, you have to change owners back.
             - ./data/couchdb:/opt/couchdb/data
             - ./conf/local.ini:/opt/couchdb/etc/local.ini
+        networks:
+            - caddy
         labels:
             caddy: ${COUCHDB_SERVER}
             # To avoid being crawled by Malicious Web Crawlers, 
@@ -41,3 +45,7 @@ services:
             caddy.handle_path_1: /e=_/* 
             caddy.handle_path_1.0_reverse_proxy: "{{upstreams 5984}}"
         restart: always
+
+networks:
+  caddy:
+    external: true
