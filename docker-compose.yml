@@ -3,18 +3,16 @@ version: "3.7"
 # Initial Author: @arminus
 # Modified      : @vrtmrz
 services:
-    nginx-proxy:
-        image: nginxproxy/nginx-proxy:alpine
+    caddy:
+        image: caddy
         ports:
             - 19778:80
-        environment:
-            # 代理路径
-            - VIRTUAL_PATH=/e=_/
-            - VIRTUAL_DEST=/
+        volumes:
+            - ./caddy/Caddyfile:/etc/caddy/Caddyfile
         restart: always
 
     couchserver:
-        image: couchdb:3.1.2
+        image: couchdb:3
         ports:
             - 15984:5984
         environment:

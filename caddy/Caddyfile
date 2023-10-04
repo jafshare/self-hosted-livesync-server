@@ -1,0 +1,3 @@
+:80 {
+    reverse_proxy /couchdb/* localhost:15984
+}
