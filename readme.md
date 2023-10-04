@@ -9,6 +9,7 @@
 3. 运行`docker-compose up -d`
 4. 访问`http://you-ip/_utils`即可设置`couchdb`的后台，创建`db`
 5. 在`obsidian`插件中填写配置即可
+
 | name           | value                               | example        |
 | -------------- | ----------------------------------- | -------------- |
 | COUCHDB_USER   | The account name you want to access | testuser       |
