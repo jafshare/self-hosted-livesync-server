@@ -3,6 +3,14 @@ version: "3.7"
 # Initial Author: @arminus
 # Modified      : @vrtmrz
 services:
+    caddy:
+        image: caddy:alpine
+        ports:
+            - 19957:80
+        volumes:
+            - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+        restart: always
+
     couchserver:
         image: couchdb:3.1.2
         ports:
