@@ -1,5 +1,0 @@
-http://127.0.0.1 {
-    reverse_proxy /e=_/* {
-        reverse_proxy http://127.0.0.1:15984
-    }
-}
