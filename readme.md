@@ -1,54 +1,18 @@
-# CouchDB with Let's encrypt's SSL certificate for Self-hosted LiveSync.
-
 ## What is this
 
 - CouchDB Server which configured about CORS for Obsidian and Self-hosted LiveSync.
-- Automatically set up SSL Certificates by Let's Encrypt (With Caddy). 
-
-## Requirements 
-
-- Internet-accessible webserver
-- Docker and docker-compose
-- Valid domain
-
-## Limitations
-
-- Verbose logging (Just leave it to docker now)
-- Automatic detection of malicious access.
 
 ## How to Use
 
-1. Clone the repository, `git clone git@github.com:vrtmrz/self-hosted-livesync-server.git`
-2. Create Caddy's network: `docker network create caddy`
-3. Configure files  
-    1. `caddy.handle_path_1: /e=_/*` on `docker-compose.yml`  
-You have to change this `e=_` to something your favorite secret word.
-    2. `authentication_redirect = /e=_/_utils/session.html` on `conf/local.ini`  
-change `e=_` too, as same as you changed on 3.1..
-4. Set environment variables.   
-
+1. 克隆仓库
+2. 设置环境变量`COUCHDB_USER`和`COUCHDB_PW`用于生成对应的账号密码
+3. 运行`docker-compose up -d`
+4. 访问`http://you-ip/_utils`即可设置`couchdb`的后台，创建`db`
+5. 在`obsidian`插件中填写配置即可
 | name           | value                               | example        |
 | -------------- | ----------------------------------- | -------------- |
-| COUCHDB_SERVER | Your server's domain                | db.example.net |
 | COUCHDB_USER   | The account name you want to access | testuser       |
 | COUCHDB_PW     | The password                        | testpassword   |
-
-
-
-5. Run `docker-compose -f docker-compose.yml up`  
-Note: If you using an arm machine, `docker-compose -f docker-compose.yml -f docker-compose.arm.yml up`
-1. Check from the browser, open `https://COUCHDB_SERVER/e=_/_utils`, and try to authenticate.
-2. Check from Self-hosted LiveSync, as like below
-
-| name          | value                      | example                    |
-| ------------- | -------------------------- | -------------------------- |
-| URI           | https://COUCHDB_SERVER/e=_ | https://db.example.net/e=_ |
-| Username      | COUCHDB_USER               | testuser                   |
-| Password      | COUCHDB_PW                 | testpassword               |
-| Database name | As you like                | test                       |
-
-8. If you could access and use the database, `docker-compose -f docker-compose.yml start` to enable your server.
-Note: or `docker-compose -f docker-compose.yml -f docker-compose.arm.yml start`.
 
 ## License 
 MIT
