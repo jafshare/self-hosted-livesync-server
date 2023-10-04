@@ -3,10 +3,10 @@ version: "3.7"
 # Initial Author: @arminus
 # Modified      : @vrtmrz
 services:
-    caddy:
+    nginx:
         image: nginx:alpine
         ports:
-            - 19957:80
+            - 19778:80
         volumes:
             - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
         restart: always
