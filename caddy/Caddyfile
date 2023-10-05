@@ -4,6 +4,6 @@
         respond / "" 403
     }
     handle_path /e=_/* {
-        reverse_proxy :5984   
+        reverse_proxy :17788   
     }
 }
