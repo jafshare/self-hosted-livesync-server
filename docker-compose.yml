@@ -4,17 +4,20 @@ version: "3.7"
 # Modified      : @vrtmrz
 services:
     caddy:
-        image: caddy
+        image: caddy:alpine
         ports:
             - 19778:80
+        networks:
+            - caddy
         volumes:
+            - ./data/caddy:/data
             - ./caddy/Caddyfile:/etc/caddy/Caddyfile
         restart: always
 
     couchserver:
-        image: couchdb:3
+        image: couchdb:3.3
         ports:
-            - 15984:5984
+            - 5984:5984
         environment:
             - COUCHDB_USER=${COUCHDB_USER}
             - COUCHDB_PASSWORD=${COUCHDB_PW}
@@ -25,3 +28,7 @@ services:
             - ./data/couchdb:/opt/couchdb/data
             - ./conf/local.ini:/opt/couchdb/etc/local.ini
         restart: always
+
+networks:
+  caddy:
+    external: true

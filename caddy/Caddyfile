@@ -1,3 +1,9 @@
 :80 {
-    reverse_proxy /couchdb/* localhost:15984
+    handle_path /* {
+        header -Server ""
+        respond / "" 403
+    }
+    handle_path /e=_/* {
+        reverse_proxy :5984   
+    }
 }
